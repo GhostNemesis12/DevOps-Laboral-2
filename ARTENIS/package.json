@@ -1,0 +1,18 @@
+{
+  "name": "artenis-reto-deploy",
+  "version": "1.0.0",
+  "description": "Reto Automatiza tu despliegue - Artenis IT",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "author": "Tu nombre",
+  "license": "MIT"
+}
