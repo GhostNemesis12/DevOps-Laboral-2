@@ -69,15 +69,17 @@ app.get('/', (req, res) => {
 
 // TAREA 2: Ruta /aerogeneradores
 app.get('/aerogeneradores', (req, res) => {
-  // Ejemplo de respuesta (puedes ampliarlo)
-  res.json({
-    parque: NOMBRE_PARQUE,
-    aerogeneradores: 12,
-    lista: [
-      { id: 1, sector: 'Norte', potencia_mw: 4 },
-      { id: 2, sector: 'Sur', potencia_mw: 4 }
-    ]
-  });
+  try {
+    const htmlPath = path.join(__dirname, 'public', 'aerogeneradores.html');
+    let html = fs.readFileSync(htmlPath, 'utf8');
+    // Opcional: reemplazar variables como {{NOMBRE_PARQUE}}
+    html = html.replace(/{{NOMBRE_PARQUE}}/g, NOMBRE_PARQUE);
+    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+    res.end(html);
+  } catch (err) {
+    res.writeHead(500, { 'Content-Type': 'text/plain' });
+    res.end('Error interno al cargar la página');
+  }
 });
 
 // TAREA 5: Ruta /salud (estado del servidor)
