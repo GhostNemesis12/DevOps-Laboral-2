@@ -1,81 +1,192 @@
-* { 
-  margin: 0; 
-  padding: 0; 
-  box-sizing: border-box; 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #0a0a1a 0%, #0d1b2a 50%, #0a1628 100%);
+  color: #e0e0e0;
   min-height: 100vh;
+}
+
+header {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 20px 40px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  color: white;
+  gap: 16px;
 }
 
-.card {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 16px;
-  padding: 48px;
-  max-width: 600px;
-  width: 90%;
-  text-align: center;
-  backdrop-filter: blur(10px);
+.logo {
+  font-size: 2em;
 }
 
-.badge {
-  background: #e94560;
-  color: white;
-  font-size: 12px;
-  font-weight: 600;
-  padding: 4px 12px;
-  border-radius: 20px;
-  display: inline-block;
-  margin-bottom: 24px;
-  letter-spacing: 1px;
+header h1 {
+  font-size: 1.4em;
+  color: #4fc3f7;
+  font-weight: 300;
+  letter-spacing: 2px;
   text-transform: uppercase;
 }
 
-h1 { 
-  font-size: 2rem; 
-  margin-bottom: 12px; 
+header span {
+  font-size: 0.8em;
+  color: #888;
+  display: block;
+  letter-spacing: 1px;
 }
 
-p { 
-  color: rgba(255,255,255,0.7); 
-  line-height: 1.6; 
-  margin-bottom: 24px; 
+.hero {
+  text-align: center;
+  padding: 60px 40px 40px;
+}
+
+.hero h2 {
+  font-size: 2.5em;
+  color: #fff;
+  font-weight: 200;
+  letter-spacing: 3px;
+  margin-bottom: 12px;
+}
+
+.hero p {
+  color: #888;
+  font-size: 1em;
+  letter-spacing: 1px;
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  padding: 40px;
+  flex-wrap: wrap;
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(79, 195, 247, 0.2);
+  border-radius: 12px;
+  padding: 28px 36px;
+  text-align: center;
+  min-width: 160px;
+  transition: all 0.3s;
+}
+
+.stat-card:hover {
+  border-color: rgba(79, 195, 247, 0.6);
+  background: rgba(79, 195, 247, 0.08);
+  transform: translateY(-4px);
+}
+
+.stat-card .numero {
+  font-size: 2.8em;
+  font-weight: 700;
+  color: #4fc3f7;
+  display: block;
+}
+
+.stat-card .etiqueta {
+  font-size: 0.8em;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 6px;
+  display: block;
+}
+
+.rutas {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px 40px 60px;
+}
+
+.rutas h3 {
+  color: #4fc3f7;
+  font-size: 0.85em;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  opacity: 0.7;
+}
+
+.ruta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  margin-bottom: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.ruta code {
+  color: #81c784;
+  font-size: 0.95em;
+  min-width: 180px;
+}
+
+.ruta span {
+  color: #666;
+  font-size: 0.85em;
+}
+
+.badge {
+  margin-left: auto;
+  font-size: 0.7em;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: rgba(79, 195, 247, 0.15);
+  color: #4fc3f7;
+  border: 1px solid rgba(79, 195, 247, 0.3);
+}
+
+.badge.pendiente {
+  background: rgba(255, 183, 77, 0.1);
+  color: #ffb74d;
+  border-color: rgba(255, 183, 77, 0.3);
+}
+
+.visitas {
+  text-align: center;
+  padding: 20px;
+  color: #444;
+  font-size: 0.8em;
+  letter-spacing: 1px;
 }
 
 .status {
-  background: rgba(255,255,255,0.05);
-  border-radius: 8px;
-  padding: 16px;
-  margin-top: 24px;
-  text-align: left;
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: #4caf50;
+  border-radius: 50%;
+  margin-right: 8px;
+  animation: pulse 2s infinite;
 }
 
-.status-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 6px 0;
-  font-size: 14px;
-  color: rgba(255,255,255,0.8);
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
 }
 
-.dot { 
-  width: 8px; 
-  height: 8px; 
-  border-radius: 50%; 
-  background: #4ecca3; 
-  flex-shrink: 0; 
-}
-
-.version { 
-  font-size: 12px; 
-  color: rgba(255,255,255,0.4); 
-  margin-top: 24px; 
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #ddd;
+  font-size: 0.75em;
+  letter-spacing: 1px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
