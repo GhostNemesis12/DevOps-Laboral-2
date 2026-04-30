@@ -6,7 +6,7 @@ const path = require('path');
 // EÓLICA NARANCO S.L. - Sistema de gestión
 // ============================================
 
-const PUERTO = process.env.PUERTO || 3000;
+const PUERTO = process.env.PUERTO || 8080;
 const NOMBRE_PARQUE = process.env.NOMBRE_PARQUE || 'Eólica Naranco S.L.';
 const RUTA_VISITAS = path.join(__dirname, 'data', 'visitas.txt');
 
