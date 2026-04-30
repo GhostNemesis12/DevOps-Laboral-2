@@ -11,5 +11,7 @@ node app.js
 Accede en http://localhost:8080
 
 ## Estructura
-
+git config --global user.email "email"
+git config --global user.name "nombre"
+gh auth login
 - `app.js` — servidor principal
