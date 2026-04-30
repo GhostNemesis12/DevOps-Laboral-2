@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
@@ -6,8 +7,10 @@ const path = require('path');
 // EÓLICA NARANCO S.L. - Sistema de gestión
 // ============================================
 
-const PUERTO = process.env.PUERTO || 3000;
+const PUERTO = process.env.PUERTO || 8080;
 const NOMBRE_PARQUE = process.env.NOMBRE_PARQUE || 'Eólica Naranco S.L.';
+const CLAVE_MANTENIMIENTO = process.env.CLAVE_MANTENIMIENTO || 'secreto123';
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'admin@eolica-naranco.com';
 const RUTA_VISITAS = path.join(__dirname, 'data', 'visitas.txt');
 
 // Lee el contador de visitas
@@ -34,6 +37,8 @@ function renderizarHTML(visitas) {
   let html = fs.readFileSync(path.join(__dirname, 'public', 'index.html'), 'utf8');
   html = html.replace(/{{NOMBRE_PARQUE}}/g, NOMBRE_PARQUE);
   html = html.replace(/{{VISITAS}}/g, visitas);
+  html = html.replace(/{{PUERTO}}/g, PUERTO);
+  html = html.replace(/{{ADMIN_EMAIL}}/g, ADMIN_EMAIL);
   return html;
 }
 
@@ -69,15 +74,17 @@ app.get('/', (req, res) => {
 
 // TAREA 2: Ruta /aerogeneradores
 app.get('/aerogeneradores', (req, res) => {
-  // Ejemplo de respuesta (puedes ampliarlo)
-  res.json({
-    parque: NOMBRE_PARQUE,
-    aerogeneradores: 12,
-    lista: [
-      { id: 1, sector: 'Norte', potencia_mw: 4 },
-      { id: 2, sector: 'Sur', potencia_mw: 4 }
-    ]
-  });
+  try {
+    const htmlPath = path.join(__dirname, 'public', 'aerogeneradores.html');
+    let html = fs.readFileSync(htmlPath, 'utf8');
+    // Opcional: reemplazar variables como {{NOMBRE_PARQUE}}
+    html = html.replace(/{{NOMBRE_PARQUE}}/g, NOMBRE_PARQUE);
+    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+    res.end(html);
+  } catch (err) {
+    res.writeHead(500, { 'Content-Type': 'text/plain' });
+    res.end('Error interno al cargar la página');
+  }
 });
 
 // TAREA 5: Ruta /salud (estado del servidor)

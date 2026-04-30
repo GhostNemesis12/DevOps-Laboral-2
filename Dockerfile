@@ -1,23 +1,25 @@
-# Usa la imagen oficial de Node.js 18 (versión ligera Alpine)
+# Imagen base: Node 18 sobre Alpine Linux
 FROM node:18-alpine
 
-# Establece el directorio de trabajo dentro del contenedor
+# Directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# Copia los archivos de dependencias primero (optimiza caché de Docker)
-COPY package*.json ./
+# Copiar el fichero app.js y la carpeta public (con HTML, CSS, etc.)
+COPY app.js .
+COPY public ./public
 
-# Instala las dependencias de producción
-RUN npm install --production
+# Variables de entorno no sensibles (van en el Dockerfile)
+ENV PUERTO=8080
+ENV NOMBRE_PARQUE="Eólica Naranco S.L."
 
-# Copia el resto del código de la aplicación
-COPY . .
+# Instalar dependencias
+RUN npm install express dotenv
 
-# Expone el puerto que usa la app
-EXPOSE 3000
+# Crear el directorio /data dentro del contenedor
+RUN mkdir /data
 
-# Variable de entorno por defecto
-ENV NODE_ENV=production
+# Puerto que usa la app
+EXPOSE 8080
 
-# Comando para iniciar la app
+# Comando para arrancar la app
 CMD ["node", "app.js"]
