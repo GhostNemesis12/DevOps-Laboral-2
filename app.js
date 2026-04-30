@@ -49,7 +49,7 @@ function renderizarHTML(visitas) {
 const app = express();
 
 // Servir archivos estáticos (CSS, imágenes, etc.)
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'), { index: false }));
 
 // Middleware para parsear JSON (por si se necesita en otras rutas)
 app.use(express.json());
