@@ -10,24 +10,61 @@ node app.js
 
 Accede en http://localhost:8080
 
-## 📁 Estructura
+## 📁 Estructura del proyecto
 
-- **`app.js` — servidor principal**  
-  Es el núcleo del backend usando Express. Se encarga de:
-  - Crear y configurar el servidor HTTP
-  - Definir rutas (`/`, `/health`, etc.)
-  - Servir archivos estáticos desde la carpeta `public`
-  - Gestionar middlewares (`express.json()`, etc.)
-  - Arrancar la aplicación en el puerto definido
+```
+DevOps-Laboral-2/
+├── app.js                  # Servidor Express (rutas, middlewares, lógica)
+├── Dockerfile              # Receta de construcción del contenedor
+├── .env                    # Variables sensibles (NO se sube al repo)
+├── .gitignore              # Excluye .env, node_modules, data/
+├── package.json            # Dependencias y metadatos del proyecto
+├── Guia.md                 # Guía paso a paso de las tareas DevOps
+├── README.md               # Este documento
+└── public/                 # Recursos estáticos del frontend
+    ├── index.html          # Panel de control principal
+    ├── aerogeneradores.html # Página de aerogeneradores
+    └── css/
+        ├── styles.css           # Estilos del panel de control
+        └── aerogeneradores.css  # Estilos de la tabla de aerogeneradores
+```
 
----
+## 🐳 Arrancar con Docker
 
-- **`public/` — recursos del frontend**  
-  Contiene todos los archivos que se envían directamente al navegador:
-  - `index.html` → estructura de la página
-  - `styles.css` → estilos visuales
-  - `script.js` (opcional) → lógica en cliente
+```bash
+# Construir la imagen
+docker build -t eolica .
 
-  Todo lo que esté aquí se sirve automáticamente gracias a:
-  ```js
-  app.use(express.static('public'));
+# Arrancar el contenedor (básico)
+docker run -d -p 8080:8080 --name mi-eolica eolica
+
+# Arrancar con variables de entorno y volumen
+docker run -d -p 8080:8080 --name mi-eolica --env-file .env -v eolica-data:/data eolica
+```
+
+Accede en http://localhost:8080
+
+## 🔗 Endpoints
+
+| Ruta | Descripción |
+|------|-------------|
+| `GET /` | Panel de control principal |
+| `GET /aerogeneradores` | Tabla de los 12 aerogeneradores por sector |
+| `GET /salud` | Healthcheck JSON con estado del servidor |
+
+## ⚙️ Variables de entorno
+
+| Variable | Ubicación | Descripción |
+|----------|-----------|-------------|
+| `PUERTO` | Dockerfile (`ENV`) | Puerto de escucha (default: 8080) |
+| `NOMBRE_PARQUE` | Dockerfile (`ENV`) | Nombre del parque eólico |
+| `CLAVE_MANTENIMIENTO` | `.env` | Clave de mantenimiento (sensible) |
+| `ADMIN_EMAIL` | `.env` | Email del administrador (sensible) |
+
+## 🛠️ Tecnologías
+
+- **Node.js 18** (Alpine Linux)
+- **Express** — framework web
+- **dotenv** — carga de variables de entorno
+- **Docker** — contenedorización
+
