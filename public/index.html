@@ -7,20 +7,61 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <div class="card">
-    <span class="badge">🚀 Artenis IT</span>
-    <h1>Reto: Automatiza tu despliegue</h1>
-    <p>Aplicación desplegada correctamente con Docker y CI/CD automático en Railway.</p>
-    
-    <div class="status">
-      <div class="status-item"><div class="dot"></div> App funcionando en local ✓</div>
-      <div class="status-item"><div class="dot"></div> Docker configurado ✓</div>
-      <div class="status-item"><div class="dot"></div> Repositorio en GitHub ✓</div>
-      <div class="status-item"><div class="dot"></div> Desplegado en Railway ✓</div>
-      <div class="status-item"><div class="dot"></div> CI/CD activo — cada push actualiza ✓</div>
+  <header>
+    <div class="logo">🌬️</div>
+    <div>
+      <h1>{{NOMBRE_PARQUE}}</h1>
+      <span><span class="status"></span>Sistema operativo</span>
     </div>
+  </header>
 
-    <p class="version">Entorno: development | Puerto: {{PUERTO}}</p>
+  <div class="hero">
+    <h2>Panel de Control</h2>
+    <p>Parque eólico · Sierra del Aramo · Asturias</p>
   </div>
+
+  <div class="stats">
+    <a href="/aerogeneradores" style="text-decoration:none; color:inherit;">
+    <div class="stat-card">
+      <span class="numero">12</span>
+      <span class="etiqueta">Aerogeneradores</span>
+    </div>
+    </a>
+    <div class="stat-card">
+      <span class="numero">4</span>
+      <span class="etiqueta">Sectores</span>
+    </div>
+    <div class="stat-card">
+      <span class="numero">48</span>
+      <span class="etiqueta">MW instalados</span>
+    </div>
+    <div class="stat-card">
+      <span class="numero">{{VISITAS}}</span>
+      <span class="etiqueta">Visitas</span>
+    </div>
+  </div>
+
+  <div class="rutas">
+    <h3>Endpoints disponibles</h3>
+    <div class="ruta">
+      <code>GET /</code>
+      <span>Panel de control principal</span>
+      <span class="badge">✓ activo</span>
+    </div>
+    <div class="ruta">
+      <code>GET /aerogeneradores</code>
+      <span>Lista de aerogeneradores</span>
+      <span class="badge pendiente">tarea 2</span>
+    </div>
+    <div class="ruta">
+      <code>GET /salud</code>
+      <span>Estado del servidor</span>
+      <span class="badge pendiente">tarea 5</span>
+    </div>
+  </div>
+
+  <footer>
+    Artenis IT · ClusterTIC Asturias · 2026
+  </footer>
 </body>
 </html>
