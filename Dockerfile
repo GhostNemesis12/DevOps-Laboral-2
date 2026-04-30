@@ -8,8 +8,12 @@ WORKDIR /app
 COPY app.js .
 COPY public ./public
 
+# Variables de entorno no sensibles (van en el Dockerfile)
+ENV PUERTO=8080
+ENV NOMBRE_PARQUE="Eólica Naranco S.L."
+
 # Instalar dependencias
-RUN npm install express
+RUN npm install express dotenv
 
 # Crear el directorio /data dentro del contenedor
 RUN mkdir /data

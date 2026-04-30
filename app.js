@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
@@ -8,6 +9,8 @@ const path = require('path');
 
 const PUERTO = process.env.PUERTO || 8080;
 const NOMBRE_PARQUE = process.env.NOMBRE_PARQUE || 'Eólica Naranco S.L.';
+const CLAVE_MANTENIMIENTO = process.env.CLAVE_MANTENIMIENTO || 'secreto123';
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'admin@eolica-naranco.com';
 const RUTA_VISITAS = path.join(__dirname, 'data', 'visitas.txt');
 
 // Lee el contador de visitas
@@ -34,6 +37,8 @@ function renderizarHTML(visitas) {
   let html = fs.readFileSync(path.join(__dirname, 'public', 'index.html'), 'utf8');
   html = html.replace(/{{NOMBRE_PARQUE}}/g, NOMBRE_PARQUE);
   html = html.replace(/{{VISITAS}}/g, visitas);
+  html = html.replace(/{{PUERTO}}/g, PUERTO);
+  html = html.replace(/{{ADMIN_EMAIL}}/g, ADMIN_EMAIL);
   return html;
 }
 
