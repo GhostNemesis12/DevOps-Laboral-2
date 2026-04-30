@@ -26,7 +26,7 @@ jobs:
         run: |
           node app.js &
           sleep 3
-          curl -f http://localhost:3000/health || exit 1
+          curl -f http://localhost:8080/health || exit 1
           kill %1
 
   deploy:
