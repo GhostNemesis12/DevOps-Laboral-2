@@ -51,7 +51,7 @@ const app = express();
 // Servir archivos estáticos (CSS, imágenes, etc.)
 app.use(express.static(path.join(__dirname, 'public'), { index: false }));
 
-// Middleware para parsear JSON (por si se necesita en otras rutas)
+// Middleware para parsear JSON
 app.use(express.json());
 
 // Contador global de visitas (se actualiza en cada petición a /)
@@ -77,7 +77,6 @@ app.get('/aerogeneradores', (req, res) => {
   try {
     const htmlPath = path.join(__dirname, 'public', 'aerogeneradores.html');
     let html = fs.readFileSync(htmlPath, 'utf8');
-    // Opcional: reemplazar variables como {{NOMBRE_PARQUE}}
     html = html.replace(/{{NOMBRE_PARQUE}}/g, NOMBRE_PARQUE);
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
     res.end(html);
@@ -89,11 +88,15 @@ app.get('/aerogeneradores', (req, res) => {
 
 // TAREA 5: Ruta /salud (estado del servidor)
 app.get('/salud', (req, res) => {
-  res.json({
+  res.setHeader('Content-Type', 'application/json');
+  res.end(JSON.stringify({
     status: 'ok',
+    nombre_parque: NOMBRE_PARQUE,
+    admin_email: ADMIN_EMAIL,
     timestamp: new Date().toISOString(),
+    uptime_segundos: Math.floor(process.uptime()),
     visitas_totales: leerVisitas()
-  });
+  }, null, 2));
 });
 
 // Manejo de errores 404

@@ -1,1 +1,8 @@
+# Variables de entorno sensibles — NUNCA subir al repo
 .env
+ 
+# Dependencias Node
+node_modules/
+ 
+# Datos locales (contador de visitas)
+data/
