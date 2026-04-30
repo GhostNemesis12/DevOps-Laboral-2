@@ -8,6 +8,9 @@ WORKDIR /app
 COPY app.js .
 COPY public ./public
 
+# Instalar dependencias
+RUN npm install express
+
 # Crear el directorio /data dentro del contenedor
 RUN mkdir /data
 
