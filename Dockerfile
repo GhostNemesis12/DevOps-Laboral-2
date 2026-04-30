@@ -21,5 +21,8 @@ RUN mkdir /data
 # Puerto que usa la app
 EXPOSE 8080
 
+# Healthcheck: consulta /salud cada 30 segundos
+HEALTHCHECK --interval=30s --timeout=5s --retries=3 CMD wget -qO- http://localhost:8080/salud || exit 1
+
 # Comando para arrancar la app
 CMD ["node", "app.js"]
